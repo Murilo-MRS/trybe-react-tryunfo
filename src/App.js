@@ -12,8 +12,19 @@ class App extends React.Component {
     cardImage: '',
     cardRare: 'Normal',
     cardTrunfo: false,
-    hasTrunfo: false,
+    hasTrunfo: true,
     isSaveButtonDisabled: true,
+  };
+
+  verifyInput = () => {
+    const max = 90;
+    const min = 0;
+    const minMaxValue = target.value >= min || target.value <= max;
+    if (target.type === 'number' && minMaxValue) {
+      this.setState({
+        isSaveButtonDisabled: false,
+      });
+    }
   };
 
   onInputChange = ({ target }) => {
@@ -21,6 +32,8 @@ class App extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
+    }, () => {
+      this.verifyInput({ target });
     });
   };
 
@@ -37,7 +50,6 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
     } = this.state;
-    // onSaveButtonClick,
     return (
       <div>
         <h1>Tryunfo</h1>
