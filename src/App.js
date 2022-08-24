@@ -17,13 +17,31 @@ class App extends React.Component {
   };
 
   verifyInput = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+    } = this.state;
     const max = 90;
     const min = 0;
-    const minMaxValue = target.value >= min || target.value <= max;
-    if (target.type === 'number' && minMaxValue) {
-      this.setState({
-        isSaveButtonDisabled: false,
-      });
+    const maxAtt = 210;
+    const attMax = Number(cardAttr1) <= max
+    && Number(cardAttr2) <= max
+    && Number(cardAttr3) <= max;
+    const attMin = Number(cardAttr1) >= min
+    && Number(cardAttr2) >= min
+    && Number(cardAttr3) >= min;
+    const attMinMax = attMin && attMax;
+    const maxSumAtt = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3);
+    const validationAtt = attMinMax && maxSumAtt <= maxAtt;
+    if (cardName && cardDescription && cardImage && cardRare && validationAtt) {
+      this.setState({ isSaveButtonDisabled: false });
+    } else {
+      this.setState({ isSaveButtonDisabled: true });
     }
   };
 
@@ -33,7 +51,7 @@ class App extends React.Component {
     this.setState({
       [name]: value,
     }, () => {
-      this.verifyInput({ target });
+      this.verifyInput();
     });
   };
 
