@@ -49,6 +49,7 @@ class App extends React.Component {
   verifyTrunfo = () => {
     const { data } = this.state;
     const lengthTrunfo = data.filter((e) => e.cardTrunfo === true).length;
+    console.log(lengthTrunfo);
   };
 
   onInputChange = ({ target }) => {
