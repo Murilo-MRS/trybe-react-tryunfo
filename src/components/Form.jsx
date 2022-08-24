@@ -101,18 +101,31 @@ class Form extends Component {
             <option value="muito raro">Muito raro</option>
           </select>
         </label>
+        <br />
         <label htmlFor="trunfo-input">
           Trunfo Card?
-          <input
-            type="checkbox"
-            name="cardTrunfo"
-            id="trunfo-input"
-            onChange={ onInputChange }
-            checked={ cardTrunfo }
-            data-testid="trunfo-input"
-            disabled={ hasTrunfo }
-          />
+          {
+            // hasTrunfo === false && <input
+            //   type="checkbox"
+            //   name="cardTrunfo"
+            //   id="trunfo-input"
+            //   onChange={ onInputChange }
+            //   checked={ cardTrunfo }
+            //   data-testid="trunfo-input"
+            //   disabled={ hasTrunfo }
+            // />
+
+            (!hasTrunfo) ? <input
+              type="checkbox"
+              name="cardTrunfo"
+              id="trunfo-input"
+              onChange={ onInputChange }
+              checked={ cardTrunfo }
+              data-testid="trunfo-input"
+            /> : <>Você já tem um Super Trunfo em seu baralho</>
+          }
         </label>
+
         <button
           type="button"
           id="save-button"

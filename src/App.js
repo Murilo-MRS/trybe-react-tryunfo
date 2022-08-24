@@ -49,7 +49,9 @@ class App extends React.Component {
   verifyTrunfo = () => {
     const { data } = this.state;
     const lengthTrunfo = data.filter((e) => e.cardTrunfo === true).length;
-    console.log(lengthTrunfo);
+    if (lengthTrunfo >= 0) {
+      this.setState({ hasTrunfo: true });
+    }
   };
 
   onInputChange = ({ target }) => {
@@ -93,6 +95,7 @@ class App extends React.Component {
       cardAttr3: '0',
       cardRare: 'Normal',
       cardImage: '',
+      cardTrunfo: false,
     });
   };
 
