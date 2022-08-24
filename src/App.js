@@ -12,7 +12,7 @@ class App extends React.Component {
     cardImage: '',
     cardRare: 'Normal',
     cardTrunfo: false,
-    hasTrunfo: true,
+    hasTrunfo: false,
     isSaveButtonDisabled: true,
     data: [],
   };
@@ -46,6 +46,11 @@ class App extends React.Component {
     }
   };
 
+  verifyTrunfo = () => {
+    const { data } = this.state;
+    const lengthTrunfo = data.filter((e) => e.cardTrunfo === true).length;
+  };
+
   onInputChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -53,6 +58,7 @@ class App extends React.Component {
       [name]: value,
     }, () => {
       this.verifyInput();
+      this.verifyTrunfo();
     });
   };
 
