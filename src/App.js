@@ -14,6 +14,7 @@ class App extends React.Component {
     cardTrunfo: false,
     hasTrunfo: true,
     isSaveButtonDisabled: true,
+    data: [],
   };
 
   verifyInput = () => {
@@ -55,6 +56,19 @@ class App extends React.Component {
     });
   };
 
+  onSaveButtonClick = (obj) => {
+    this.setState((state) => ({
+      data: [...state.data, obj],
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardRare: 'Normal',
+      cardImage: '',
+    }));
+  };
+
   render() {
     const {
       cardName,
@@ -83,7 +97,7 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
           hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
-          // onSaveButtonClick={ this.onSaveButtonClick }
+          onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card
           cardName={ cardName }
