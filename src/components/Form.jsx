@@ -110,6 +110,7 @@ class Form extends Component {
             onChange={ onInputChange }
             checked={ cardTrunfo }
             data-testid="trunfo-input"
+            disabled={ hasTrunfo }
           />
         </label>
         <button
