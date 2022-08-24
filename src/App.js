@@ -49,7 +49,7 @@ class App extends React.Component {
   verifyTrunfo = () => {
     const { data } = this.state;
     const lengthTrunfo = data.filter((e) => e.cardTrunfo === true).length;
-    if (lengthTrunfo >= 0) {
+    if (lengthTrunfo > 0) {
       this.setState({ hasTrunfo: true });
     }
   };
@@ -61,7 +61,6 @@ class App extends React.Component {
       [name]: value,
     }, () => {
       this.verifyInput();
-      this.verifyTrunfo();
     });
   };
 
@@ -86,6 +85,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
     };
+    // Ajuda do filipe Lima turma B
     const arrObj = [...data, cardObject];
     this.setState({ data: arrObj,
       cardName: '',
@@ -96,7 +96,7 @@ class App extends React.Component {
       cardRare: 'Normal',
       cardImage: '',
       cardTrunfo: false,
-    });
+    }, this.verifyTrunfo);
   };
 
   render() {
