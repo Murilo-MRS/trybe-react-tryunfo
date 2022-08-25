@@ -15,7 +15,6 @@ class App extends React.Component {
     hasTrunfo: false,
     isSaveButtonDisabled: true,
     data: [],
-    deleteButton: true,
   };
 
   verifyInput = () => {
@@ -32,11 +31,11 @@ class App extends React.Component {
     const min = 0;
     const maxAtt = 210;
     const attMax = Number(cardAttr1) <= max
-    && Number(cardAttr2) <= max
-    && Number(cardAttr3) <= max;
+      && Number(cardAttr2) <= max
+      && Number(cardAttr3) <= max;
     const attMin = Number(cardAttr1) >= min
-    && Number(cardAttr2) >= min
-    && Number(cardAttr3) >= min;
+      && Number(cardAttr2) >= min
+      && Number(cardAttr3) >= min;
     const attMinMax = attMin && attMax;
     const maxSumAtt = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3);
     const validationAtt = attMinMax && maxSumAtt <= maxAtt;
@@ -58,15 +57,19 @@ class App extends React.Component {
   onInputChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
-      [name]: value,
-    }, () => {
-      this.verifyInput();
-    });
+    this.setState(
+      {
+        [name]: value,
+      },
+      () => {
+        this.verifyInput();
+      },
+    );
   };
 
   onSaveButtonClick = () => {
-    const { cardName,
+    const {
+      cardName,
       cardDescription,
       cardAttr1,
       cardAttr2,
@@ -88,16 +91,35 @@ class App extends React.Component {
     };
     // Ajuda do filipe Lima turma B
     const arrObj = [...data, cardObject];
-    this.setState({ data: arrObj,
-      cardName: '',
-      cardDescription: '',
-      cardAttr1: '0',
-      cardAttr2: '0',
-      cardAttr3: '0',
-      cardRare: 'Normal',
-      cardImage: '',
-      cardTrunfo: false,
-    }, this.verifyTrunfo);
+    this.setState(
+      {
+        data: arrObj,
+        cardName: '',
+        cardDescription: '',
+        cardAttr1: '0',
+        cardAttr2: '0',
+        cardAttr3: '0',
+        cardRare: 'Normal',
+        cardImage: '',
+        cardTrunfo: false,
+      },
+      this.verifyTrunfo,
+    );
+  };
+
+  deleteCard = (objCard) => {
+    const { data } = this.state;
+    const dataRemove = data.filter((e) => e !== objCard);
+
+    if (objCard.cardTrunfo) {
+      this.setState({
+        data: dataRemove,
+        hasTrunfo: false,
+      });
+    }
+    this.setState({
+      data: dataRemove,
+    });
   };
 
   render() {
@@ -113,7 +135,6 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
       data,
-      deleteButton,
     } = this.state;
     return (
       <div>
@@ -141,22 +162,28 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
-          deleteButton={ false }
         />
-        {
-          data.map((e) => (<Card
-            key={ e.cardName }
-            cardName={ e.cardName }
-            cardDescription={ e.cardDescription }
-            cardAttr1={ e.cardAttr1 }
-            cardAttr2={ e.cardAttr2 }
-            cardAttr3={ e.cardAttr3 }
-            cardImage={ e.cardImage }
-            cardRare={ e.cardRare }
-            cardTrunfo={ e.cardTrunfo }
-            deleteButton={ deleteButton }
-          />))
-        }
+        {data.map((e) => (
+          <div key={ e.cardName }>
+            <Card
+              cardName={ e.cardName }
+              cardDescription={ e.cardDescription }
+              cardAttr1={ e.cardAttr1 }
+              cardAttr2={ e.cardAttr2 }
+              cardAttr3={ e.cardAttr3 }
+              cardImage={ e.cardImage }
+              cardRare={ e.cardRare }
+              cardTrunfo={ e.cardTrunfo }
+            />
+            <button
+              data-testid="delete-button"
+              type="button"
+              onClick={ () => this.deleteCard(e) }
+            >
+              Excluir
+            </button>
+          </div>
+        ))}
       </div>
     );
   }
