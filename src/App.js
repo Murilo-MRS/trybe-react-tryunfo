@@ -15,6 +15,7 @@ class App extends React.Component {
     hasTrunfo: false,
     isSaveButtonDisabled: true,
     data: [],
+    deleteButton: true,
   };
 
   verifyInput = () => {
@@ -112,6 +113,7 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
       data,
+      deleteButton,
     } = this.state;
     return (
       <div>
@@ -139,6 +141,7 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          deleteButton={ false }
         />
         {
           data.map((e) => (<Card
@@ -151,6 +154,7 @@ class App extends React.Component {
             cardImage={ e.cardImage }
             cardRare={ e.cardRare }
             cardTrunfo={ e.cardTrunfo }
+            deleteButton={ deleteButton }
           />))
         }
       </div>

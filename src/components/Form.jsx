@@ -105,16 +105,6 @@ class Form extends Component {
         <label htmlFor="trunfo-input">
           Trunfo Card?
           {
-            // hasTrunfo === false && <input
-            //   type="checkbox"
-            //   name="cardTrunfo"
-            //   id="trunfo-input"
-            //   onChange={ onInputChange }
-            //   checked={ cardTrunfo }
-            //   data-testid="trunfo-input"
-            //   disabled={ hasTrunfo }
-            // />
-
             (!hasTrunfo) ? <input
               type="checkbox"
               name="cardTrunfo"
