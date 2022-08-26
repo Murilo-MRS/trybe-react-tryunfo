@@ -15,6 +15,7 @@ class App extends React.Component {
     hasTrunfo: false,
     isSaveButtonDisabled: true,
     data: [],
+    inputFilter: '',
   };
 
   verifyInput = () => {
@@ -67,6 +68,7 @@ class App extends React.Component {
     );
   };
 
+  // ao apertar o botao salva
   onSaveButtonClick = () => {
     const {
       cardName,
@@ -107,6 +109,7 @@ class App extends React.Component {
     );
   };
 
+  // deleta carta e habilita hastrunfo
   deleteCard = (objCard) => {
     const { data } = this.state;
     const dataRemove = data.filter((e) => e !== objCard);
@@ -122,6 +125,16 @@ class App extends React.Component {
     });
   };
 
+  filterData = ({ target }) => {
+    const { value } = target;
+    // const dataFilterName = data.filter((element) => name === element.cardName);
+    this.setState({ inputFilter: value });
+  };
+
+  // handleFilterName = () => {
+
+  // };
+
   render() {
     const {
       cardName,
@@ -135,6 +148,7 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
       data,
+      inputFilter,
     } = this.state;
     return (
       <div>
@@ -163,43 +177,40 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        {data.map((e) => (
-          <div key={ e.cardName }>
-            <Card
-              cardName={ e.cardName }
-              cardDescription={ e.cardDescription }
-              cardAttr1={ e.cardAttr1 }
-              cardAttr2={ e.cardAttr2 }
-              cardAttr3={ e.cardAttr3 }
-              cardImage={ e.cardImage }
-              cardRare={ e.cardRare }
-              cardTrunfo={ e.cardTrunfo }
-            />
-            <button
-              data-testid="delete-button"
-              type="button"
-              onClick={ () => this.deleteCard(e) }
-            >
-              Excluir
-            </button>
-          </div>
-        ))}
+        <h2>Todas as cartas</h2>
+        <h3>Filtros de busca</h3>
+        <input
+          type="text"
+          value={ inputFilter }
+          onChange={ this.filterData }
+          data-testid="name-filter"
+        />
+        {/* filtra input text */}
+        {data && data.filter((e) => e.cardName.includes(inputFilter))
+          .map((e) => (
+            <div key={ e.cardName }>
+              <Card
+                cardName={ e.cardName }
+                cardDescription={ e.cardDescription }
+                cardAttr1={ e.cardAttr1 }
+                cardAttr2={ e.cardAttr2 }
+                cardAttr3={ e.cardAttr3 }
+                cardImage={ e.cardImage }
+                cardRare={ e.cardRare }
+                cardTrunfo={ e.cardTrunfo }
+              />
+              <button
+                data-testid="delete-button"
+                type="button"
+                onClick={ () => this.deleteCard(e) }
+              >
+                Excluir
+              </button>
+            </div>
+          ))}
       </div>
     );
   }
 }
 
 export default App;
-
-// cardName={ cardName }
-// cardDescription={ cardDescription }
-// cardAttr1={ cardAttr1 }
-// cardAttr2={ cardAttr2 }
-// cardAttr3={ cardAttr3 }
-// cardImage={ cardImage }
-// cardRare={ cardRare }
-// cardTrunfo={ cardTrunfo }
-// hasTrunfo={ hasTrunfo }
-// isSaveButtonDisabled={ isSaveButtonDisabled }
-// onInputChange={ onInputChange }
-// onSaveButtonClick={ onSaveButtonClick }
