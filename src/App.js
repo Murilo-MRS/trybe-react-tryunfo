@@ -17,7 +17,7 @@ class App extends React.Component {
     data: [],
     inputFilter: '',
     selectFilter: 'todas',
-    // checkboxFilter: '',
+    checkboxFilter: false,
   };
 
   verifyInput = () => {
@@ -138,21 +138,16 @@ class App extends React.Component {
     this.setState({ selectFilter: value });
   };
 
+  filterDataTrunfo = ({ target }) => {
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({ checkboxFilter: value });
+  };
+
   render() {
     const {
-      cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      cardTrunfo,
-      hasTrunfo,
-      isSaveButtonDisabled,
-      data,
-      inputFilter,
-      selectFilter,
+      cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
+      cardImage, cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled,
+      data, inputFilter, selectFilter, checkboxFilter,
     } = this.state;
     return (
       <div>
@@ -188,25 +183,35 @@ class App extends React.Component {
           value={ inputFilter }
           onChange={ this.filterDataName }
           data-testid="name-filter"
+          disabled={ checkboxFilter }
         />
         <select
           data-testid="rare-filter"
           onChange={ this.filterDataRarity }
           value={ selectFilter }
+          disabled={ checkboxFilter }
         >
           <option value="todas">Todas</option>
           <option value="normal">Normal</option>
           <option value="raro">Raro</option>
           <option value="muito raro">muito raro</option>
         </select>
+        <label htmlFor="trunfo">
+          Super Trunfo
+          <input
+            type="checkbox"
+            onChange={ this.filterDataTrunfo }
+            data-testid="trunfo-filter"
+          />
+        </label>
+
         {/* filtra input text */}
         {data && data.filter((e) => e.cardName.includes(inputFilter))
           .filter((e) => {
-            if (selectFilter === 'todas') {
-              return e;
-            }
+            if (selectFilter === 'todas') return e;
             return e.cardRare === selectFilter;
           })
+          .filter((e) => (checkboxFilter ? e.cardTrunfo : e))
           .map((e) => (
             <div key={ e.cardName }>
               <Card
@@ -232,5 +237,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;
