@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: auto;
+  max-width: 900px;
+}
+
+.form-container {
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
