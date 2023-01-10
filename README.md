@@ -3,7 +3,7 @@
 Projeto realizado durante módulo de Front-end do curso de desenvolvimento web da Trybe.
 
 <details>
-  <summary><strong>O que foi feito</strong></summary>
+  <summary><strong>O que foi feito</strong></summary></br>
 
   <p>
   Neste projeto, foi desenvolvido uma aplicação em React com manipulação de estados em classes. Essa aplicação simulará um jogo de Super Trunfo, desde a criação das cartas do seu baralho, filtro de busca das cartas e até a funcionalidade de jogar.
