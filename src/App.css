@@ -6,6 +6,6 @@
 }
 
 .form-container {
-    flex-flow: row nowrap;
-    justify-content: space-around;
+  flex-flow: row nowrap;
+  justify-content: space-around;
 }

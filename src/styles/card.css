@@ -1,19 +1,19 @@
 .card-container {
-    background-color: aliceblue;
-    border: 1px solid black;
-    border-radius: 15px;
-    display: flex;
-    flex-flow: column nowrap;
-    padding: 20px 0px;
-    width: 40%;
+  background-color: aliceblue;
+  border: 1px solid black;
+  border-radius: 15px;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 20px 0px;
+  width: 40%;
 }
 
 .card-container img {
-    margin: auto;
-    width: 75%;
+  margin: auto;
+  width: 75%;
 }
 
 .card-container p {
-    margin-left: 20px;
-    justify-content: space-around;
+  margin-left: 20px;
+  justify-content: space-around;
 }
